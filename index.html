@@ -7,13 +7,13 @@
 
 <title>📐 K-8 Geometry Tutor</title>
 
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/1048/1048953.png">
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/2784/2784487.png">
 
 <style>
 
 body{
 font-family:Arial,sans-serif;
-max-width:900px;
+max-width:950px;
 margin:auto;
 padding:20px;
 background:#f4f4f4;
@@ -40,7 +40,7 @@ background:#1f1f1f;
 }
 
 .logo{
-font-size:65px;
+font-size:70px;
 text-align:center;
 animation:bounce 2s infinite;
 }
@@ -95,7 +95,12 @@ background:#333;
 }
 
 .pro{
-border:2px solid hotpink;
+border:3px solid hotpink;
+background:linear-gradient(white,#ffe8f7);
+}
+
+.dark .pro{
+background:#2b1d2a;
 }
 
 .badge{
@@ -133,6 +138,24 @@ a{
 text-decoration:none;
 }
 
+.locked{
+opacity:.7;
+}
+
+.premium-area{
+display:none;
+}
+
+.unlocked{
+display:block;
+animation:fadein 1s;
+}
+
+@keyframes fadein{
+from{opacity:0;}
+to{opacity:1;}
+}
+
 </style>
 
 </head>
@@ -141,7 +164,7 @@ text-decoration:none;
 
 <div class="logo">📐</div>
 
-<h1>K-8 Geometry Tutor & Quizzer</h1>
+<h1>📐 K-8 Geometry Tutor & Quizzer</h1>
 
 <p style="text-align:center;">
 👩‍💻 Coded and designed by a 12-year-old developer
@@ -152,8 +175,26 @@ text-decoration:none;
 </center>
 
 <h2 style="text-align:center;">
-Shapes Area and Perimeter
+📚 Shapes Area and Perimeter
 </h2>
+
+<div class="section">
+
+<h2>📚 Basic Geometry Formulas</h2>
+
+<p>🔺 Triangle Area = (base × height) ÷ 2</p>
+<p>🔺 Triangle Perimeter = side1 + side2 + side3</p>
+
+<p>⚪ Circle Area = π × r²</p>
+<p>⚪ Circle Circumference = 2 × π × r</p>
+
+<p>🟦 Rectangle Area = length × width</p>
+<p>🟦 Rectangle Perimeter = 2(length + width)</p>
+
+<p>📏 Trapezoid Area = ((top + bottom) × height) ÷ 2</p>
+<p>📏 Trapezoid Perimeter = all sides added together</p>
+
+</div>
 
 <div class="section">
 
@@ -243,52 +284,62 @@ Answer the question!
 <div class="section pro">
 
 <h2>
-💎 Premium Quiz
+💎 Premium Membership
 <span class="badge">PRO</span>
 </h2>
 
-<p id="premiumText">
-🔒 Subscribe to unlock premium geometry features!
+<p>
+🔒 Unlock advanced geometry quizzes and extra shapes!
 </p>
 
 <ul>
-<li>⭐ Harder questions</li>
-<li>⭐ Random word problems</li>
-<li>⭐ More geometry shapes</li>
+<li>⭐ Harder random questions</li>
+<li>⭐ Pentagon formulas</li>
+<li>⭐ Hexagon formulas</li>
+<li>⭐ Octagon formulas</li>
 <li>⭐ Bigger score system</li>
-<li>⭐ Future multiplayer mode</li>
-<li>⭐ Premium geometry formulas</li>
+<li>⭐ More geometry calculators</li>
+<li>⭐ Premium practice mode</li>
 </ul>
 
 <button onclick="unlockPremium()">
-💳 Subscribe for $4.99/mo
+💳 Unlock Premium
 </button>
 
-<div id="premiumContent" style="display:none; margin-top:20px;">
+<div id="premiumMessage" class="output">
+Premium Locked 🔒
+</div>
 
-<h2>📚 Premium Geometry Formulas</h2>
+</div>
 
-<p>🔺 Triangle Area = (base × height) ÷ 2</p>
-<p>🔺 Triangle Perimeter = side1 + side2 + side3</p>
+<div id="premiumArea" class="section premium-area">
 
-<p>⚪ Circle Area = π × r²</p>
-<p>⚪ Circle Circumference = 2 × π × r</p>
+<h2>💎 PREMIUM QUIZ AREA</h2>
 
-<p>🟦 Rectangle Area = length × width</p>
-<p>🟦 Rectangle Perimeter = 2(length + width)</p>
+<h3>📚 Premium Geometry Formulas</h3>
 
-<p>📏 Trapezoid Area = ((top + bottom) × height) ÷ 2</p>
-<p>📏 Trapezoid Perimeter = all sides added together</p>
+<p>⬟ Pentagon Area = (Perimeter × Apothem) ÷ 2</p>
+<p>⬢ Hexagon Area = (3√3 × side²) ÷ 2</p>
+<p>🛑 Octagon Area = 2(1 + √2)s²</p>
 
 <hr>
 
-<h2>🧠 Premium Questions</h2>
+<h3>🎯 Premium Quiz</h3>
 
-<p>⭐ What is the circumference of a circle with radius 5?</p>
-<p>⭐ What is the area of a trapezoid with bases 8 and 4 and height 6?</p>
-<p>⭐ Find the perimeter of a rectangle with length 12 and width 7.</p>
+<p id="premiumQuestion"></p>
 
+<input type="number" id="premiumAnswer" placeholder="Premium Answer">
+
+<button onclick="checkPremium()">💎 Submit Premium Answer</button>
+
+<div class="output" id="premiumOutput">
+Premium quiz waiting...
 </div>
+
+<p class="score">
+💎 Premium Score:
+<span id="premiumScore">0</span>
+</p>
 
 </div>
 
@@ -312,7 +363,11 @@ If this website helped you, consider supporting it!
 
 <div class="section ad">
 
-📢 Your ads can go here later using Google AdSense
+📢 Advertisement Space
+
+<br><br>
+
+Google AdSense ads can go here later.
 
 </div>
 
@@ -471,7 +526,9 @@ let questions=[
 {q:"Triangle area with base 6 and height 3?",a:9},
 {q:"3 + 4 + 5 = ?",a:12},
 {q:"Rectangle 9 × 2 = ?",a:18},
-{q:"Circle circumference with radius 2? (round)",a:13}
+{q:"Circle circumference radius 2? (round)",a:13},
+{q:"Triangle area base 10 height 4?",a:20},
+{q:"Rectangle perimeter 8 by 2?",a:20}
 ];
 
 let current;
@@ -513,22 +570,74 @@ newQuestion();
 
 function unlockPremium(){
 
-document.getElementById("premiumContent").style.display="block";
+document.getElementById("premiumArea").classList.add("unlocked");
 
-document.getElementById("premiumText").innerText=
-"✅ Premium Unlocked!";
+document.getElementById("premiumMessage").innerText=
+"💎 Premium Unlocked!";
 
 localStorage.setItem("premium","yes");
-
 }
 
 if(localStorage.getItem("premium")==="yes"){
+document.getElementById("premiumArea").classList.add("unlocked");
+document.getElementById("premiumMessage").innerText=
+"💎 Premium Unlocked!";
+}
 
-document.getElementById("premiumContent").style.display="block";
+let premiumScore=localStorage.getItem("premiumScore") || 0;
 
-document.getElementById("premiumText").innerText=
-"✅ Premium Unlocked!";
+document.getElementById("premiumScore").innerText=premiumScore;
 
+let premiumQuestions=[
+{q:"Pentagon with 5 equal sides of 4. Perimeter?",a:20},
+{q:"Hexagon with 6 equal sides of 3. Perimeter?",a:18},
+{q:"Octagon with 8 equal sides of 2. Perimeter?",a:16},
+{q:"Triangle area base 12 height 5?",a:30},
+{q:"Rectangle area 15 × 3?",a:45},
+{q:"Circle circumference radius 5? (round)",a:31},
+{q:"Rectangle perimeter 20 by 10?",a:60},
+{q:"Triangle perimeter 7+8+9?",a:24},
+{q:"Pentagon with side 10. Perimeter?",a:50},
+{q:"Hexagon with side 8. Perimeter?",a:48}
+];
+
+let currentPremium;
+
+function newPremiumQuestion(){
+
+currentPremium=
+premiumQuestions[Math.floor(Math.random()*premiumQuestions.length)];
+
+document.getElementById("premiumQuestion").innerText=
+currentPremium.q;
+}
+
+newPremiumQuestion();
+
+function checkPremium(){
+
+let user=parseFloat(document.getElementById("premiumAnswer").value);
+
+if(user===currentPremium.a){
+
+premiumScore++;
+
+localStorage.setItem("premiumScore",premiumScore);
+
+document.getElementById("premiumOutput").innerText=
+"🎉 Correct Premium Answer!";
+
+}else{
+
+document.getElementById("premiumOutput").innerText=
+"❌ Wrong! Correct answer: "+currentPremium.a;
+}
+
+document.getElementById("premiumScore").innerText=premiumScore;
+
+document.getElementById("premiumAnswer").value="";
+
+newPremiumQuestion();
 }
 
 </script>
