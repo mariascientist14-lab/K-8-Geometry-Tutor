@@ -16,7 +16,8 @@ font-family:Arial,sans-serif;
 max-width:950px;
 margin:auto;
 padding:20px;
-background:#f4f4f4;
+background:linear-gradient(135deg,#e0f7ff,#f4f4f4);
+min-height:100vh;
 color:#222;
 transition:.3s;
 }
@@ -51,7 +52,7 @@ animation:bounce 2s infinite;
 100%{transform:translateY(0);}
 }
 
-h1,h2{
+h1,h2,h3{
 text-align:center;
 }
 
@@ -62,13 +63,15 @@ margin:8px 0;
 border-radius:6px;
 border:1px solid #ccc;
 box-sizing:border-box;
+font-size:16px;
 }
 
 button{
+width:100%;
 background:#007BFF;
 color:white;
 border:none;
-padding:10px 15px;
+padding:12px;
 border-radius:6px;
 cursor:pointer;
 margin-top:10px;
@@ -78,7 +81,7 @@ transition:.2s;
 
 button:hover{
 background:#0056b3;
-transform:scale(1.03);
+transform:scale(1.02);
 }
 
 .output{
@@ -138,10 +141,6 @@ a{
 text-decoration:none;
 }
 
-.locked{
-opacity:.7;
-}
-
 .premium-area{
 display:none;
 }
@@ -154,6 +153,13 @@ animation:fadein 1s;
 @keyframes fadein{
 from{opacity:0;}
 to{opacity:1;}
+}
+
+.nav{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:10px;
+margin-bottom:20px;
 }
 
 </style>
@@ -170,13 +176,21 @@ to{opacity:1;}
 👩‍💻 Coded and designed by a 12-year-old developer
 </p>
 
-<center>
 <button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
-</center>
 
-<h2 style="text-align:center;">
-📚 Shapes Area and Perimeter
-</h2>
+<div class="nav">
+
+<a href="#triangle"><button>🔺 Triangle</button></a>
+
+<a href="#circle"><button>⚪ Circle</button></a>
+
+<a href="#rectangle"><button>🟦 Rectangle</button></a>
+
+<a href="#quiz"><button>📝 Quiz</button></a>
+
+<a href="#premiumArea"><button>💎 Premium</button></a>
+
+</div>
 
 <div class="section">
 
@@ -196,13 +210,16 @@ to{opacity:1;}
 
 </div>
 
-<div class="section">
+<div class="section" id="triangle">
 
 <h2>🔺 Triangle Area & Perimeter</h2>
 
 <input type="number" id="triHeight" placeholder="Height">
+
 <input type="number" id="triBase" placeholder="Base">
+
 <input type="number" id="triSide1" placeholder="Side 1">
+
 <input type="number" id="triSide2" placeholder="Side 2">
 
 <button onclick="triangle()">🧮 Calculate</button>
@@ -213,7 +230,7 @@ Enter numbers above!
 
 </div>
 
-<div class="section">
+<div class="section" id="circle">
 
 <h2>⚪ Circle Area & Circumference</h2>
 
@@ -227,11 +244,12 @@ Enter numbers above!
 
 </div>
 
-<div class="section">
+<div class="section" id="rectangle">
 
 <h2>🟦 Rectangle Area & Perimeter</h2>
 
 <input type="number" id="rectLength" placeholder="Length">
+
 <input type="number" id="rectWidth" placeholder="Width">
 
 <button onclick="rectangle()">🧮 Calculate</button>
@@ -247,9 +265,13 @@ Enter numbers above!
 <h2>📏 Trapezoid Area & Perimeter</h2>
 
 <input type="number" id="trapTop" placeholder="Top Base">
+
 <input type="number" id="trapBottom" placeholder="Bottom Base">
+
 <input type="number" id="trapHeight" placeholder="Height">
+
 <input type="number" id="trapLeft" placeholder="Left Side">
+
 <input type="number" id="trapRight" placeholder="Right Side">
 
 <button onclick="trapezoid()">🧮 Calculate</button>
@@ -260,7 +282,7 @@ Enter numbers above!
 
 </div>
 
-<div class="section">
+<div class="section" id="quiz">
 
 <h2>📝 Random Geometry Quiz 🎯</h2>
 
@@ -278,6 +300,8 @@ Answer the question!
 🏆 Saved Score:
 <span id="savedScore">0</span>
 </p>
+
+<button onclick="resetScore()">🗑 Reset Scores</button>
 
 </div>
 
@@ -319,7 +343,9 @@ Premium Locked 🔒
 <h3>📚 Premium Geometry Formulas</h3>
 
 <p>⬟ Pentagon Area = (Perimeter × Apothem) ÷ 2</p>
+
 <p>⬢ Hexagon Area = (3√3 × side²) ÷ 2</p>
+
 <p>🛑 Octagon Area = 2(1 + √2)s²</p>
 
 <hr>
@@ -379,10 +405,24 @@ Privacy Policy
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <script>
 
 function toggleDark(){
+
 document.body.classList.toggle("dark");
+
+if(document.body.classList.contains("dark")){
+localStorage.setItem("darkMode","on");
+}else{
+localStorage.setItem("darkMode","off");
+}
+
+}
+
+if(localStorage.getItem("darkMode")==="on"){
+document.body.classList.add("dark");
 }
 
 function triangle(){
@@ -403,19 +443,9 @@ let perimeter=b+s1+s2;
 document.getElementById("triOutput").innerText=
 `📚 STEP BY STEP
 
-Area Formula:
-(base × height) ÷ 2
+Triangle Area = ${area}
 
-(${b} × ${h}) ÷ 2
-
-${b*h} ÷ 2 = ${area}
-
---------------------
-
-Perimeter:
-${b} + ${s1} + ${s2}
-
-= ${perimeter}`;
+Triangle Perimeter = ${perimeter}`;
 }
 
 function circle(){
@@ -423,7 +453,7 @@ function circle(){
 let r=parseFloat(document.getElementById("radius").value);
 
 if(isNaN(r)){
-document.getElementById("circleOutput").innerText="Please enter a valid number!";
+document.getElementById("circleOutput").innerText="Please enter valid numbers!";
 return;
 }
 
@@ -433,26 +463,15 @@ let c=2*Math.PI*r;
 document.getElementById("circleOutput").innerText=
 `📚 STEP BY STEP
 
-Area Formula:
-π × r²
+Circle Area = ${area.toFixed(2)}
 
-π × ${r} × ${r}
-
-= ${area.toFixed(2)}
-
---------------------
-
-Circumference Formula:
-2 × π × r
-
-2 × π × ${r}
-
-= ${c.toFixed(2)}`;
+Circle Circumference = ${c.toFixed(2)}`;
 }
 
 function rectangle(){
 
 let l=parseFloat(document.getElementById("rectLength").value);
+
 let w=parseFloat(document.getElementById("rectWidth").value);
 
 if(isNaN(l)||isNaN(w)){
@@ -466,27 +485,21 @@ let perimeter=2*(l+w);
 document.getElementById("rectOutput").innerText=
 `📚 STEP BY STEP
 
-Area:
-${l} × ${w}
+Rectangle Area = ${area}
 
-= ${area}
-
---------------------
-
-Perimeter:
-2(${l}+${w})
-
-2(${l+w})
-
-= ${perimeter}`;
+Rectangle Perimeter = ${perimeter}`;
 }
 
 function trapezoid(){
 
 let t=parseFloat(document.getElementById("trapTop").value);
+
 let b=parseFloat(document.getElementById("trapBottom").value);
+
 let h=parseFloat(document.getElementById("trapHeight").value);
+
 let l=parseFloat(document.getElementById("trapLeft").value);
+
 let r=parseFloat(document.getElementById("trapRight").value);
 
 if(isNaN(t)||isNaN(b)||isNaN(h)||isNaN(l)||isNaN(r)){
@@ -500,44 +513,29 @@ let perimeter=t+b+l+r;
 document.getElementById("trapOutput").innerText=
 `📚 STEP BY STEP
 
-Area:
-((${t}+${b})×${h})÷2
+Trapezoid Area = ${area}
 
-(${t+b}×${h})÷2
-
-${(t+b)*h}÷2
-
-= ${area}
-
---------------------
-
-Perimeter:
-${t}+${b}+${l}+${r}
-
-= ${perimeter}`;
+Trapezoid Perimeter = ${perimeter}`;
 }
 
 let score=localStorage.getItem("score") || 0;
 
 document.getElementById("savedScore").innerText=score;
 
-let questions=[
-{q:"Rectangle 5 × 4 = ?",a:20},
-{q:"Triangle area with base 6 and height 3?",a:9},
-{q:"3 + 4 + 5 = ?",a:12},
-{q:"Rectangle 9 × 2 = ?",a:18},
-{q:"Circle circumference radius 2? (round)",a:13},
-{q:"Triangle area base 10 height 4?",a:20},
-{q:"Rectangle perimeter 8 by 2?",a:20}
-];
-
 let current;
 
 function newQuestion(){
 
-current=questions[Math.floor(Math.random()*questions.length)];
+let num1=Math.floor(Math.random()*10)+1;
+let num2=Math.floor(Math.random()*10)+1;
+
+current={
+q:`Rectangle ${num1} × ${num2} = ?`,
+a:num1*num2
+};
 
 document.getElementById("question").innerText=current.q;
+
 }
 
 newQuestion();
@@ -546,7 +544,7 @@ function checkAnswer(){
 
 let user=parseFloat(document.getElementById("answer").value);
 
-if(user===current.a){
+if(Math.abs(user-current.a)<1){
 
 score++;
 
@@ -555,10 +553,13 @@ localStorage.setItem("score",score);
 document.getElementById("quizOutput").innerText=
 "🎉 Correct!";
 
+confetti();
+
 }else{
 
 document.getElementById("quizOutput").innerText=
 "❌ Wrong! Correct answer: "+current.a;
+
 }
 
 document.getElementById("savedScore").innerText=score;
@@ -566,6 +567,20 @@ document.getElementById("savedScore").innerText=score;
 document.getElementById("answer").value="";
 
 newQuestion();
+
+}
+
+function resetScore(){
+
+score=0;
+premiumScore=0;
+
+localStorage.setItem("score",0);
+localStorage.setItem("premiumScore",0);
+
+document.getElementById("savedScore").innerText=0;
+document.getElementById("premiumScore").innerText=0;
+
 }
 
 function unlockPremium(){
@@ -576,40 +591,36 @@ document.getElementById("premiumMessage").innerText=
 "💎 Premium Unlocked!";
 
 localStorage.setItem("premium","yes");
+
 }
 
 if(localStorage.getItem("premium")==="yes"){
+
 document.getElementById("premiumArea").classList.add("unlocked");
+
 document.getElementById("premiumMessage").innerText=
 "💎 Premium Unlocked!";
+
 }
 
 let premiumScore=localStorage.getItem("premiumScore") || 0;
 
 document.getElementById("premiumScore").innerText=premiumScore;
 
-let premiumQuestions=[
-{q:"Pentagon with 5 equal sides of 4. Perimeter?",a:20},
-{q:"Hexagon with 6 equal sides of 3. Perimeter?",a:18},
-{q:"Octagon with 8 equal sides of 2. Perimeter?",a:16},
-{q:"Triangle area base 12 height 5?",a:30},
-{q:"Rectangle area 15 × 3?",a:45},
-{q:"Circle circumference radius 5? (round)",a:31},
-{q:"Rectangle perimeter 20 by 10?",a:60},
-{q:"Triangle perimeter 7+8+9?",a:24},
-{q:"Pentagon with side 10. Perimeter?",a:50},
-{q:"Hexagon with side 8. Perimeter?",a:48}
-];
-
 let currentPremium;
 
 function newPremiumQuestion(){
 
-currentPremium=
-premiumQuestions[Math.floor(Math.random()*premiumQuestions.length)];
+let side=Math.floor(Math.random()*20)+1;
+
+currentPremium={
+q:`Pentagon with side ${side}. Perimeter?`,
+a:side*5
+};
 
 document.getElementById("premiumQuestion").innerText=
 currentPremium.q;
+
 }
 
 newPremiumQuestion();
@@ -618,7 +629,7 @@ function checkPremium(){
 
 let user=parseFloat(document.getElementById("premiumAnswer").value);
 
-if(user===currentPremium.a){
+if(Math.abs(user-currentPremium.a)<1){
 
 premiumScore++;
 
@@ -627,10 +638,13 @@ localStorage.setItem("premiumScore",premiumScore);
 document.getElementById("premiumOutput").innerText=
 "🎉 Correct Premium Answer!";
 
+confetti();
+
 }else{
 
 document.getElementById("premiumOutput").innerText=
 "❌ Wrong! Correct answer: "+currentPremium.a;
+
 }
 
 document.getElementById("premiumScore").innerText=premiumScore;
@@ -638,7 +652,24 @@ document.getElementById("premiumScore").innerText=premiumScore;
 document.getElementById("premiumAnswer").value="";
 
 newPremiumQuestion();
+
 }
+
+document.getElementById("answer").addEventListener("keypress",function(event){
+
+if(event.key==="Enter"){
+checkAnswer();
+}
+
+});
+
+document.getElementById("premiumAnswer").addEventListener("keypress",function(event){
+
+if(event.key==="Enter"){
+checkPremium();
+}
+
+});
 
 </script>
 
