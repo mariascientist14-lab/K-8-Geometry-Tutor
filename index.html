@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>📐 K-8 Geometry Tutor</title>
+<title>📐 Ultimate Geometry Tutor</title>
 
 <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/2784/2784487.png">
 
@@ -13,11 +14,10 @@
 
 body{
 font-family:Arial,sans-serif;
-max-width:950px;
+max-width:1200px;
 margin:auto;
 padding:20px;
-background:linear-gradient(135deg,#e0f7ff,#f4f4f4);
-min-height:100vh;
+background:linear-gradient(135deg,#dff6ff,#f4f4f4);
 color:#222;
 transition:.3s;
 }
@@ -27,12 +27,46 @@ background:#121212;
 color:white;
 }
 
+.hero{
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+padding:45px;
+border-radius:25px;
+text-align:center;
+color:white;
+margin-bottom:25px;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.hero h1{
+font-size:45px;
+margin-bottom:10px;
+}
+
+.navbar{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+position:sticky;
+top:10px;
+z-index:999;
+background:white;
+padding:15px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.dark .navbar{
+background:#1f1f1f;
+}
+
 .section{
 background:white;
 padding:20px;
 margin:20px 0;
-border-radius:12px;
-box-shadow:0 2px 6px rgba(0,0,0,.1);
+border-radius:18px;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
 transition:.3s;
 }
 
@@ -41,7 +75,7 @@ background:#1f1f1f;
 }
 
 .logo{
-font-size:70px;
+font-size:80px;
 text-align:center;
 animation:bounce 2s infinite;
 }
@@ -52,626 +86,27 @@ animation:bounce 2s infinite;
 100%{transform:translateY(0);}
 }
 
-h1,h2,h3{
-text-align:center;
-}
-
-input{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:6px;
-border:1px solid #ccc;
-box-sizing:border-box;
-font-size:16px;
-}
-
-button{
-width:100%;
-background:#007BFF;
-color:white;
-border:none;
-padding:12px;
-border-radius:6px;
-cursor:pointer;
-margin-top:10px;
-font-size:15px;
-transition:.2s;
-}
-
-button:hover{
-background:#0056b3;
-transform:scale(1.02);
-}
-
-.output{
-margin-top:12px;
-padding:12px;
-background:#eee;
-border-left:5px solid #007BFF;
-white-space:pre-wrap;
-border-radius:6px;
-}
-
-.dark .output{
-background:#333;
-}
-
-.pro{
-border:3px solid hotpink;
-background:linear-gradient(white,#ffe8f7);
-}
-
-.dark .pro{
-background:#2b1d2a;
-}
-
-.badge{
-background:hotpink;
-color:white;
-padding:4px 8px;
-border-radius:20px;
-font-size:12px;
-}
-
-.footer{
-text-align:center;
-font-size:13px;
-margin-top:30px;
-}
-
-.score{
-font-weight:bold;
-font-size:18px;
-}
-
-.ad{
-background:#ddd;
-padding:15px;
-text-align:center;
-border-radius:8px;
-font-weight:bold;
-}
-
-.dark .ad{
-background:#2d2d2d;
-}
-
-a{
-text-decoration:none;
-}
-
-.premium-area{
-display:none;
-}
-
-.unlocked{
-display:block;
-animation:fadein 1s;
-}
-
-@keyframes fadein{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-.nav{
+.card-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:10px;
-margin-bottom:20px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
 }
 
-</style>
-
-</head>
-
-<body>
-
-<div class="logo">📐</div>
-
-<h1>📐 K-8 Geometry Tutor & Quizzer</h1>
-
-<p style="text-align:center;">
-👩‍💻 Coded and designed by a 12-year-old developer
-</p>
-
-<button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
-
-<div class="nav">
-
-<a href="#triangle"><button>🔺 Triangle</button></a>
-
-<a href="#circle"><button>⚪ Circle</button></a>
-
-<a href="#rectangle"><button>🟦 Rectangle</button></a>
-
-<a href="#quiz"><button>📝 Quiz</button></a>
-
-<a href="#premiumArea"><button>💎 Premium</button></a>
-
-</div>
-
-<div class="section">
-
-<h2>📚 Basic Geometry Formulas</h2>
-
-<p>🔺 Triangle Area = (base × height) ÷ 2</p>
-<p>🔺 Triangle Perimeter = side1 + side2 + side3</p>
-
-<p>⚪ Circle Area = π × r²</p>
-<p>⚪ Circle Circumference = 2 × π × r</p>
-
-<p>🟦 Rectangle Area = length × width</p>
-<p>🟦 Rectangle Perimeter = 2(length + width)</p>
-
-<p>📏 Trapezoid Area = ((top + bottom) × height) ÷ 2</p>
-<p>📏 Trapezoid Perimeter = all sides added together</p>
-
-</div>
-
-<div class="section" id="triangle">
-
-<h2>🔺 Triangle Area & Perimeter</h2>
-
-<input type="number" id="triHeight" placeholder="Height">
-
-<input type="number" id="triBase" placeholder="Base">
-
-<input type="number" id="triSide1" placeholder="Side 1">
-
-<input type="number" id="triSide2" placeholder="Side 2">
-
-<button onclick="triangle()">🧮 Calculate</button>
-
-<div class="output" id="triOutput">
-Enter numbers above!
-</div>
-
-</div>
-
-<div class="section" id="circle">
-
-<h2>⚪ Circle Area & Circumference</h2>
-
-<input type="number" id="radius" placeholder="Radius">
-
-<button onclick="circle()">🧮 Calculate</button>
-
-<div class="output" id="circleOutput">
-Enter numbers above!
-</div>
-
-</div>
-
-<div class="section" id="rectangle">
-
-<h2>🟦 Rectangle Area & Perimeter</h2>
-
-<input type="number" id="rectLength" placeholder="Length">
-
-<input type="number" id="rectWidth" placeholder="Width">
-
-<button onclick="rectangle()">🧮 Calculate</button>
-
-<div class="output" id="rectOutput">
-Enter numbers above!
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>📏 Trapezoid Area & Perimeter</h2>
-
-<input type="number" id="trapTop" placeholder="Top Base">
-
-<input type="number" id="trapBottom" placeholder="Bottom Base">
-
-<input type="number" id="trapHeight" placeholder="Height">
-
-<input type="number" id="trapLeft" placeholder="Left Side">
-
-<input type="number" id="trapRight" placeholder="Right Side">
-
-<button onclick="trapezoid()">🧮 Calculate</button>
-
-<div class="output" id="trapOutput">
-Enter numbers above!
-</div>
-
-</div>
-
-<div class="section" id="quiz">
-
-<h2>📝 Random Geometry Quiz 🎯</h2>
-
-<p id="question"></p>
-
-<input type="number" id="answer" placeholder="Your Answer">
-
-<button onclick="checkAnswer()">✅ Submit Answer</button>
-
-<div class="output" id="quizOutput">
-Answer the question!
-</div>
-
-<p class="score">
-🏆 Saved Score:
-<span id="savedScore">0</span>
-</p>
-
-<button onclick="resetScore()">🗑 Reset Scores</button>
-
-</div>
-
-<div class="section pro">
-
-<h2>
-💎 Premium Membership
-<span class="badge">PRO</span>
-</h2>
-
-<p>
-🔒 Unlock advanced geometry quizzes and extra shapes!
-</p>
-
-<ul>
-<li>⭐ Harder random questions</li>
-<li>⭐ Pentagon formulas</li>
-<li>⭐ Hexagon formulas</li>
-<li>⭐ Octagon formulas</li>
-<li>⭐ Bigger score system</li>
-<li>⭐ More geometry calculators</li>
-<li>⭐ Premium practice mode</li>
-</ul>
-
-<button onclick="unlockPremium()">
-💳 Unlock Premium
-</button>
-
-<div id="premiumMessage" class="output">
-Premium Locked 🔒
-</div>
-
-</div>
-
-<div id="premiumArea" class="section premium-area">
-
-<h2>💎 PREMIUM QUIZ AREA</h2>
-
-<h3>📚 Premium Geometry Formulas</h3>
-
-<p>⬟ Pentagon Area = (Perimeter × Apothem) ÷ 2</p>
-
-<p>⬢ Hexagon Area = (3√3 × side²) ÷ 2</p>
-
-<p>🛑 Octagon Area = 2(1 + √2)s²</p>
-
-<hr>
-
-<h3>🎯 Premium Quiz</h3>
-
-<p id="premiumQuestion"></p>
-
-<input type="number" id="premiumAnswer" placeholder="Premium Answer">
-
-<button onclick="checkPremium()">💎 Submit Premium Answer</button>
-
-<div class="output" id="premiumOutput">
-Premium quiz waiting...
-</div>
-
-<p class="score">
-💎 Premium Score:
-<span id="premiumScore">0</span>
-</p>
-
-</div>
-
-<div class="section">
-
-<h2>☕ Support the Developer</h2>
-
-<p>
-If this website helped you, consider supporting it!
-</p>
-
-<a href="https://buymeacoffee.com/maria8" target="_blank">
-
-<button>
-☕ Buy Me a Coffee
-</button>
-
-</a>
-
-</div>
-
-<div class="section ad">
-
-📢 Advertisement Space
-
-<br><br>
-
-Google AdSense ads can go here later.
-
-</div>
-
-<div class="footer">
-
-<a href="privacy.html">
-Privacy Policy
-</a>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<script>
-
-function toggleDark(){
-
-document.body.classList.toggle("dark");
-
-if(document.body.classList.contains("dark")){
-localStorage.setItem("darkMode","on");
-}else{
-localStorage.setItem("darkMode","off");
+.shape-card{
+padding:20px;
+border-radius:20px;
+color:white;
+transition:.3s;
 }
 
+.shape-card:hover{
+transform:translateY(-5px) scale(1.02);
 }
 
-if(localStorage.getItem("darkMode")==="on"){
-document.body.classList.add("dark");
+.triangle-card{
+background:linear-gradient(135deg,#ffb347,#ffcc33);
 }
 
-function triangle(){
-
-let h=parseFloat(document.getElementById("triHeight").value);
-let b=parseFloat(document.getElementById("triBase").value);
-let s1=parseFloat(document.getElementById("triSide1").value);
-let s2=parseFloat(document.getElementById("triSide2").value);
-
-if(isNaN(h)||isNaN(b)||isNaN(s1)||isNaN(s2)){
-document.getElementById("triOutput").innerText="Please enter valid numbers!";
-return;
-}
-
-let area=(b*h)/2;
-let perimeter=b+s1+s2;
-
-document.getElementById("triOutput").innerText=
-`📚 STEP BY STEP
-
-Triangle Area = ${area}
-
-Triangle Perimeter = ${perimeter}`;
-}
-
-function circle(){
-
-let r=parseFloat(document.getElementById("radius").value);
-
-if(isNaN(r)){
-document.getElementById("circleOutput").innerText="Please enter valid numbers!";
-return;
-}
-
-let area=Math.PI*r*r;
-let c=2*Math.PI*r;
-
-document.getElementById("circleOutput").innerText=
-`📚 STEP BY STEP
-
-Circle Area = ${area.toFixed(2)}
-
-Circle Circumference = ${c.toFixed(2)}`;
-}
-
-function rectangle(){
-
-let l=parseFloat(document.getElementById("rectLength").value);
-
-let w=parseFloat(document.getElementById("rectWidth").value);
-
-if(isNaN(l)||isNaN(w)){
-document.getElementById("rectOutput").innerText="Please enter valid numbers!";
-return;
-}
-
-let area=l*w;
-let perimeter=2*(l+w);
-
-document.getElementById("rectOutput").innerText=
-`📚 STEP BY STEP
-
-Rectangle Area = ${area}
-
-Rectangle Perimeter = ${perimeter}`;
-}
-
-function trapezoid(){
-
-let t=parseFloat(document.getElementById("trapTop").value);
-
-let b=parseFloat(document.getElementById("trapBottom").value);
-
-let h=parseFloat(document.getElementById("trapHeight").value);
-
-let l=parseFloat(document.getElementById("trapLeft").value);
-
-let r=parseFloat(document.getElementById("trapRight").value);
-
-if(isNaN(t)||isNaN(b)||isNaN(h)||isNaN(l)||isNaN(r)){
-document.getElementById("trapOutput").innerText="Please enter valid numbers!";
-return;
-}
-
-let area=((t+b)*h)/2;
-let perimeter=t+b+l+r;
-
-document.getElementById("trapOutput").innerText=
-`📚 STEP BY STEP
-
-Trapezoid Area = ${area}
-
-Trapezoid Perimeter = ${perimeter}`;
-}
-
-let score=localStorage.getItem("score") || 0;
-
-document.getElementById("savedScore").innerText=score;
-
-let current;
-
-function newQuestion(){
-
-let num1=Math.floor(Math.random()*10)+1;
-let num2=Math.floor(Math.random()*10)+1;
-
-current={
-q:`Rectangle ${num1} × ${num2} = ?`,
-a:num1*num2
-};
-
-document.getElementById("question").innerText=current.q;
-
-}
-
-newQuestion();
-
-function checkAnswer(){
-
-let user=parseFloat(document.getElementById("answer").value);
-
-if(Math.abs(user-current.a)<1){
-
-score++;
-
-localStorage.setItem("score",score);
-
-document.getElementById("quizOutput").innerText=
-"🎉 Correct!";
-
-confetti();
-
-}else{
-
-document.getElementById("quizOutput").innerText=
-"❌ Wrong! Correct answer: "+current.a;
-
-}
-
-document.getElementById("savedScore").innerText=score;
-
-document.getElementById("answer").value="";
-
-newQuestion();
-
-}
-
-function resetScore(){
-
-score=0;
-premiumScore=0;
-
-localStorage.setItem("score",0);
-localStorage.setItem("premiumScore",0);
-
-document.getElementById("savedScore").innerText=0;
-document.getElementById("premiumScore").innerText=0;
-
-}
-
-function unlockPremium(){
-
-document.getElementById("premiumArea").classList.add("unlocked");
-
-document.getElementById("premiumMessage").innerText=
-"💎 Premium Unlocked!";
-
-localStorage.setItem("premium","yes");
-
-}
-
-if(localStorage.getItem("premium")==="yes"){
-
-document.getElementById("premiumArea").classList.add("unlocked");
-
-document.getElementById("premiumMessage").innerText=
-"💎 Premium Unlocked!";
-
-}
-
-let premiumScore=localStorage.getItem("premiumScore") || 0;
-
-document.getElementById("premiumScore").innerText=premiumScore;
-
-let currentPremium;
-
-function newPremiumQuestion(){
-
-let side=Math.floor(Math.random()*20)+1;
-
-currentPremium={
-q:`Pentagon with side ${side}. Perimeter?`,
-a:side*5
-};
-
-document.getElementById("premiumQuestion").innerText=
-currentPremium.q;
-
-}
-
-newPremiumQuestion();
-
-function checkPremium(){
-
-let user=parseFloat(document.getElementById("premiumAnswer").value);
-
-if(Math.abs(user-currentPremium.a)<1){
-
-premiumScore++;
-
-localStorage.setItem("premiumScore",premiumScore);
-
-document.getElementById("premiumOutput").innerText=
-"🎉 Correct Premium Answer!";
-
-confetti();
-
-}else{
-
-document.getElementById("premiumOutput").innerText=
-"❌ Wrong! Correct answer: "+currentPremium.a;
-
-}
-
-document.getElementById("premiumScore").innerText=premiumScore;
-
-document.getElementById("premiumAnswer").value="";
-
-newPremiumQuestion();
-
-}
-
-document.getElementById("answer").addEventListener("keypress",function(event){
-
-if(event.key==="Enter"){
-checkAnswer();
-}
-
-});
-
-document.getElementById("premiumAnswer").addEventListener("keypress",function(event){
-
-if(event.key==="Enter"){
-checkPremium();
-}
-
-});
-
-</script>
-
-</body>
-</html>
+.circle-card{
+background:linear-gr
+```
