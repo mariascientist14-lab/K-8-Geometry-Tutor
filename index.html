@@ -18,7 +18,7 @@ scroll-behavior:smooth;
 
 body{
 font-family:Arial,sans-serif;
-max-width:1200px;
+max-width:1300px;
 margin:auto;
 padding:20px;
 background:linear-gradient(135deg,#dff6ff,#f4f4f4);
@@ -43,23 +43,11 @@ animation:fadeIn 1s;
 }
 
 .hero h1{
-font-size:48px;
-margin-bottom:10px;
+font-size:50px;
 }
 
 .hero p{
-font-size:18px;
-}
-
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+font-size:20px;
 }
 
 .navbar{
@@ -85,9 +73,8 @@ background:#1f1f1f;
 background:white;
 padding:20px;
 margin:20px 0;
-border-radius:18px;
+border-radius:20px;
 box-shadow:0 3px 10px rgba(0,0,0,.1);
-transition:.3s;
 animation:fadeIn 1s;
 }
 
@@ -96,7 +83,7 @@ background:#1f1f1f;
 }
 
 .logo{
-font-size:85px;
+font-size:90px;
 text-align:center;
 animation:bounce 2s infinite;
 }
@@ -107,9 +94,20 @@ animation:bounce 2s infinite;
 100%{transform:translateY(0);}
 }
 
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
 .card-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 }
 
@@ -121,7 +119,7 @@ transition:.3s;
 }
 
 .shape-card:hover{
-transform:translateY(-5px) scale(1.02);
+transform:translateY(-5px) scale(1.03);
 }
 
 .triangle-card{
@@ -144,23 +142,23 @@ input{
 width:100%;
 padding:12px;
 margin:8px 0;
-border-radius:8px;
 border:none;
+border-radius:8px;
 font-size:16px;
 }
 
 button{
 width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
 background:#007BFF;
 color:white;
-border:none;
-padding:12px;
-border-radius:8px;
-cursor:pointer;
-margin-top:10px;
-font-size:16px;
 transition:.2s;
-font-weight:bold;
 }
 
 button:hover{
@@ -171,21 +169,20 @@ transform:scale(1.03);
 .output{
 margin-top:12px;
 padding:12px;
-background:rgba(255,255,255,.9);
+background:white;
 color:black;
 border-left:5px solid #007BFF;
-white-space:pre-wrap;
 border-radius:8px;
+white-space:pre-wrap;
 }
 
 .level-box{
-text-align:center;
+background:linear-gradient(135deg,#ffe259,#ffa751);
 padding:20px;
+border-radius:20px;
+text-align:center;
 font-size:22px;
 font-weight:bold;
-border-radius:18px;
-background:linear-gradient(135deg,#ffe259,#ffa751);
-margin-bottom:20px;
 }
 
 .badges{
@@ -209,7 +206,7 @@ background:white;
 border-radius:15px;
 border:2px solid #ccc;
 width:100%;
-max-width:500px;
+max-width:600px;
 display:block;
 margin:auto;
 }
@@ -225,10 +222,10 @@ background:#2b1d2a;
 
 .badge{
 background:hotpink;
-color:white;
 padding:4px 8px;
 border-radius:20px;
 font-size:12px;
+color:white;
 }
 
 .premium-area{
@@ -240,17 +237,44 @@ display:block;
 animation:fadeIn 1s;
 }
 
+.xp-bar{
+width:100%;
+height:30px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin-top:15px;
+}
+
+.xp-fill{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+transition:.3s;
+}
+
+.shop-item{
+background:#f5f5f5;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.dark .shop-item{
+background:#2b2b2b;
+}
+
 .footer{
 text-align:center;
-font-size:14px;
 margin-top:40px;
+font-size:14px;
 }
 
 .ad{
 background:#ddd;
 padding:20px;
-text-align:center;
 border-radius:15px;
+text-align:center;
 font-weight:bold;
 }
 
@@ -275,7 +299,7 @@ text-decoration:none;
 <h1>📐 Ultimate Geometry Tutor</h1>
 
 <p>
-Learn geometry, level up, unlock premium, and become a math master!
+Learn geometry, solve quizzes, level up, unlock premium, and become a math master!
 </p>
 
 </div>
@@ -289,6 +313,8 @@ Learn geometry, level up, unlock premium, and become a math master!
 <a href="#rectangle"><button>🟦 Rectangle</button></a>
 
 <a href="#quiz"><button>📝 Quiz</button></a>
+
+<a href="#shop"><button>🛒 Shop</button></a>
 
 <a href="#premiumArea"><button>💎 Premium</button></a>
 
@@ -310,7 +336,25 @@ Learn geometry, level up, unlock premium, and become a math master!
 
 🔥 Streak: <span id="streak">0</span>
 
+<div class="xp-bar">
+<div class="xp-fill" id="xpFill"></div>
+</div>
+
 <div class="badges" id="badges"></div>
+
+</div>
+
+<div class="section">
+
+<h2>🏅 Daily Challenge</h2>
+
+<p>
+Solve 5 quiz questions correctly today!
+</p>
+
+<div class="output" id="dailyOutput">
+0 / 5 completed
+</div>
 
 </div>
 
@@ -319,11 +363,8 @@ Learn geometry, level up, unlock premium, and become a math master!
 <h2>📚 Geometry Formulas</h2>
 
 <p>🔺 Triangle Area = (base × height) ÷ 2</p>
-
 <p>⚪ Circle Area = π × r²</p>
-
 <p>🟦 Rectangle Area = length × width</p>
-
 <p>📏 Trapezoid Area = ((top + bottom) × height) ÷ 2</p>
 
 </div>
@@ -335,11 +376,8 @@ Learn geometry, level up, unlock premium, and become a math master!
 <h2>🔺 Triangle</h2>
 
 <input type="number" id="triHeight" placeholder="Height">
-
 <input type="number" id="triBase" placeholder="Base">
-
 <input type="number" id="triSide1" placeholder="Side 1">
-
 <input type="number" id="triSide2" placeholder="Side 2">
 
 <button onclick="triangle()">🧮 Calculate</button>
@@ -369,7 +407,6 @@ Enter numbers above!
 <h2>🟦 Rectangle</h2>
 
 <input type="number" id="rectLength" placeholder="Length">
-
 <input type="number" id="rectWidth" placeholder="Width">
 
 <button onclick="rectangle()">🧮 Calculate</button>
@@ -385,13 +422,9 @@ Enter numbers above!
 <h2>📏 Trapezoid</h2>
 
 <input type="number" id="trapTop" placeholder="Top Base">
-
 <input type="number" id="trapBottom" placeholder="Bottom Base">
-
 <input type="number" id="trapHeight" placeholder="Height">
-
 <input type="number" id="trapLeft" placeholder="Left Side">
-
 <input type="number" id="trapRight" placeholder="Right Side">
 
 <button onclick="trapezoid()">🧮 Calculate</button>
@@ -408,13 +441,21 @@ Enter numbers above!
 
 <h2>🎨 Shape Visualizer</h2>
 
-<canvas id="shapeCanvas" width="500" height="400"></canvas>
+<canvas id="shapeCanvas" width="600" height="400"></canvas>
 
 </div>
 
 <div class="section" id="quiz">
 
-<h2>📝 Random Geometry Quiz 🎯</h2>
+<h2>📝 Geometry Quiz 🎯</h2>
+
+<select id="difficulty">
+
+<option value="easy">Easy</option>
+<option value="medium">Medium</option>
+<option value="hard">Hard</option>
+
+</select>
 
 <p id="question"></p>
 
@@ -435,6 +476,40 @@ Answer the question!
 
 </div>
 
+<div class="section" id="shop">
+
+<h2>🛒 XP Shop</h2>
+
+<div class="shop-item">
+
+<h3>🌈 Rainbow Theme</h3>
+
+<p>Cost: 100 XP</p>
+
+<button onclick="buyRainbow()">
+Buy Theme
+</button>
+
+</div>
+
+<div class="shop-item">
+
+<h3>🔥 Fire Badge</h3>
+
+<p>Cost: 50 XP</p>
+
+<button onclick="buyFireBadge()">
+Buy Badge
+</button>
+
+</div>
+
+<div class="output" id="shopOutput">
+Buy cool upgrades with XP!
+</div>
+
+</div>
+
 <div class="section pro">
 
 <h2>
@@ -442,27 +517,16 @@ Answer the question!
 <span class="badge">PRO</span>
 </h2>
 
-<p>
-Unlock advanced geometry quizzes and extra shapes!
-</p>
-
 <ul>
 
 <li>⭐ Pentagon formulas</li>
-
 <li>⭐ Hexagon formulas</li>
-
 <li>⭐ Octagon formulas</li>
-
 <li>⭐ Cube formulas</li>
-
 <li>⭐ Sphere formulas</li>
-
 <li>⭐ Cone formulas</li>
-
-<li>⭐ More quizzes</li>
-
 <li>⭐ Bigger XP rewards</li>
+<li>⭐ More quizzes</li>
 
 </ul>
 
@@ -480,23 +544,12 @@ Premium Locked 🔒
 
 <h2>💎 Premium Geometry Lab</h2>
 
-<h3>⬟ Pentagon</h3>
-<p>Perimeter = side × 5</p>
-
-<h3>⬢ Hexagon</h3>
-<p>Perimeter = side × 6</p>
-
-<h3>🛑 Octagon</h3>
-<p>Perimeter = side × 8</p>
-
-<h3>⚽ Sphere</h3>
-<p>Volume = 4/3 × π × r³</p>
-
-<h3>🍦 Cone</h3>
-<p>Volume = (1/3)πr²h</p>
-
-<h3>🧊 Cube</h3>
-<p>Volume = side³</p>
+<p>⬟ Pentagon = side × 5</p>
+<p>⬢ Hexagon = side × 6</p>
+<p>🛑 Octagon = side × 8</p>
+<p>⚽ Sphere Volume = 4/3 × π × r³</p>
+<p>🍦 Cone Volume = (1/3)πr²h</p>
+<p>🧊 Cube Volume = side³</p>
 
 <hr>
 
@@ -566,6 +619,7 @@ let level=parseInt(localStorage.getItem("level")) || 1;
 let streak=parseInt(localStorage.getItem("streak")) || 0;
 let score=parseInt(localStorage.getItem("score")) || 0;
 let premiumScore=parseInt(localStorage.getItem("premiumScore")) || 0;
+let daily=parseInt(localStorage.getItem("daily")) || 0;
 
 document.getElementById("savedScore").innerText=score;
 document.getElementById("premiumScore").innerText=premiumScore;
@@ -575,6 +629,12 @@ function updateLevel(){
 document.getElementById("xp").innerText=xp;
 document.getElementById("level").innerText=level;
 document.getElementById("streak").innerText=streak;
+
+document.getElementById("xpFill").style.width=
+(xp%(level*50))/(level*50)*100+"%";
+
+document.getElementById("dailyOutput").innerText=
+daily+" / 5 completed";
 
 }
 
@@ -618,6 +678,10 @@ if(localStorage.getItem("premium")==="yes"){
 badges.push("💎 Premium Member");
 }
 
+if(localStorage.getItem("fireBadge")==="yes"){
+badges.push("🔥 Fire Badge");
+}
+
 let html="";
 
 for(let b of badges){
@@ -637,7 +701,7 @@ const canvas=document.getElementById("shapeCanvas");
 const ctx=canvas.getContext("2d");
 
 function clearCanvas(){
-ctx.clearRect(0,0,500,400);
+ctx.clearRect(0,0,600,400);
 }
 
 function drawTriangle(){
@@ -645,9 +709,9 @@ function drawTriangle(){
 clearCanvas();
 
 ctx.beginPath();
-ctx.moveTo(250,60);
-ctx.lineTo(100,320);
-ctx.lineTo(400,320);
+ctx.moveTo(300,60);
+ctx.lineTo(120,320);
+ctx.lineTo(480,320);
 ctx.closePath();
 
 ctx.fillStyle="#ffcc33";
@@ -660,7 +724,7 @@ function drawCircle(){
 clearCanvas();
 
 ctx.beginPath();
-ctx.arc(250,200,90,0,Math.PI*2);
+ctx.arc(300,200,100,0,Math.PI*2);
 
 ctx.fillStyle="#36d1dc";
 ctx.fill();
@@ -672,7 +736,7 @@ function drawRectangle(){
 clearCanvas();
 
 ctx.fillStyle="#38ef7d";
-ctx.fillRect(120,120,250,150);
+ctx.fillRect(150,120,300,150);
 
 }
 
@@ -681,9 +745,9 @@ function drawTrapezoid(){
 clearCanvas();
 
 ctx.beginPath();
-ctx.moveTo(170,100);
-ctx.lineTo(330,100);
-ctx.lineTo(400,300);
+ctx.moveTo(200,100);
+ctx.lineTo(400,100);
+ctx.lineTo(500,300);
 ctx.lineTo(100,300);
 ctx.closePath();
 
@@ -712,9 +776,15 @@ let area=(b*h)/2;
 let perimeter=b+s1+s2;
 
 document.getElementById("triOutput").innerText=
-`Triangle Area = ${area}
+`STEP BY STEP
 
-Triangle Perimeter = ${perimeter}`;
+(base × height) ÷ 2
+
+(${b} × ${h}) ÷ 2
+
+= ${area}
+
+Perimeter = ${perimeter}`;
 
 drawTriangle();
 
@@ -739,7 +809,7 @@ let c=2*Math.PI*r;
 document.getElementById("circleOutput").innerText=
 `Circle Area = ${area.toFixed(2)}
 
-Circle Circumference = ${c.toFixed(2)}`;
+Circumference = ${c.toFixed(2)}`;
 
 drawCircle();
 
@@ -765,7 +835,7 @@ let perimeter=2*(l+w);
 document.getElementById("rectOutput").innerText=
 `Rectangle Area = ${area}
 
-Rectangle Perimeter = ${perimeter}`;
+Perimeter = ${perimeter}`;
 
 drawRectangle();
 
@@ -794,7 +864,7 @@ let perimeter=t+b+l+r;
 document.getElementById("trapOutput").innerText=
 `Trapezoid Area = ${area}
 
-Trapezoid Perimeter = ${perimeter}`;
+Perimeter = ${perimeter}`;
 
 drawTrapezoid();
 
@@ -804,14 +874,27 @@ let current;
 
 function newQuestion(){
 
-let num1=Math.floor(Math.random()*12)+1;
-let num2=Math.floor(Math.random()*12)+1;
+let difficulty=
+document.getElementById("difficulty").value;
+
+let max=10;
+let xpReward=10;
+
+if(difficulty==="medium"){
+max=20;
+}
+
+if(difficulty==="hard"){
+max=50;
+}
+
+let num1=Math.floor(Math.random()*max)+1;
+let num2=Math.floor(Math.random()*max)+1;
 
 current={
-
 q:`Rectangle ${num1} × ${num2} = ?`,
-a:num1*num2
-
+a:num1*num2,
+reward:xpReward
 };
 
 document.getElementById("question").innerText=current.q;
@@ -819,6 +902,11 @@ document.getElementById("question").innerText=current.q;
 }
 
 newQuestion();
+
+document.getElementById("difficulty").addEventListener(
+"change",
+newQuestion
+);
 
 function checkAnswer(){
 
@@ -828,16 +916,27 @@ if(user===current.a){
 
 score++;
 streak++;
+daily++;
 
-addXP(10);
+addXP(current.reward);
 
 localStorage.setItem("score",score);
 localStorage.setItem("streak",streak);
+localStorage.setItem("daily",daily);
 
 confetti();
 
 document.getElementById("quizOutput").innerText=
 "🎉 Correct!";
+
+if(daily>=5){
+
+addXP(50);
+
+document.getElementById("dailyOutput").innerText=
+"🏅 Daily Challenge Complete! +50 XP";
+
+}
 
 }else{
 
@@ -852,9 +951,9 @@ document.getElementById("quizOutput").innerText=
 
 document.getElementById("savedScore").innerText=score;
 
-updateLevel();
-
 document.getElementById("answer").value="";
+
+updateLevel();
 
 newQuestion();
 
@@ -869,18 +968,65 @@ premiumScore=0;
 xp=0;
 level=1;
 streak=0;
+daily=0;
 
-localStorage.setItem("score",0);
-localStorage.setItem("premiumScore",0);
-localStorage.setItem("xp",0);
-localStorage.setItem("level",1);
-localStorage.setItem("streak",0);
+localStorage.clear();
 
 document.getElementById("savedScore").innerText=0;
 document.getElementById("premiumScore").innerText=0;
 
 updateLevel();
 updateBadges();
+
+}
+
+function buyRainbow(){
+
+if(xp>=100){
+
+xp-=100;
+
+localStorage.setItem("xp",xp);
+
+document.body.style.background=
+"linear-gradient(135deg,purple,hotpink,cyan)";
+
+document.getElementById("shopOutput").innerText=
+"🌈 Rainbow Theme Unlocked!";
+
+updateLevel();
+
+}else{
+
+document.getElementById("shopOutput").innerText=
+"❌ Not enough XP!";
+
+}
+
+}
+
+function buyFireBadge(){
+
+if(xp>=50){
+
+xp-=50;
+
+localStorage.setItem("xp",xp);
+
+localStorage.setItem("fireBadge","yes");
+
+document.getElementById("shopOutput").innerText=
+"🔥 Fire Badge Unlocked!";
+
+updateLevel();
+updateBadges();
+
+}else{
+
+document.getElementById("shopOutput").innerText=
+"❌ Not enough XP!";
+
+}
 
 }
 
@@ -912,9 +1058,7 @@ let premiumQuestions=[
 {q:"Hexagon with side 4. Perimeter?",a:24},
 {q:"Octagon with side 3. Perimeter?",a:24},
 {q:"Cube volume with side 3?",a:27},
-{q:"Rectangle area 20 × 2?",a:40},
-{q:"Triangle area base 12 height 5?",a:30},
-{q:"Circle circumference radius 5? (round)",a:31},
+{q:"Sphere volume radius 2? (round)",a:34},
 {q:"Cone volume radius 3 height 6? (round)",a:57}
 
 ];
