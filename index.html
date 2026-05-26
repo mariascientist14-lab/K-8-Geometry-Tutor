@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -176,6 +177,34 @@ line-height:25px;
 font-weight:bold;
 }
 
+.pro{
+border:3px solid hotpink;
+background:linear-gradient(white,#ffe8f7);
+}
+
+.dark .pro{
+background:#2b1d2a;
+}
+
+.premium-area{
+display:none;
+}
+
+.unlocked{
+display:block;
+}
+
+.shop-item{
+background:#f4f4f4;
+padding:15px;
+border-radius:15px;
+margin:10px 0;
+}
+
+.dark .shop-item{
+background:#333;
+}
+
 .footer{
 text-align:center;
 margin-top:40px;
@@ -183,6 +212,7 @@ font-size:14px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -192,7 +222,7 @@ font-size:14px;
 <h1>📐 Ultimate Geometry Tutor</h1>
 
 <p>
-Learn geometry, level up, and become a math master!
+Learn geometry, level up, unlock premium, and become a math master!
 </p>
 
 </div>
@@ -227,6 +257,20 @@ Learn geometry, level up, and become a math master!
 </div>
 
 <div class="badges" id="badges"></div>
+
+</div>
+
+<div class="section">
+
+<h2>🏅 Daily Challenge</h2>
+
+<p>
+Solve 5 questions correctly today!
+</p>
+
+<p>
+<span id="dailyCount">0</span> / 5 completed
+</p>
 
 </div>
 
@@ -327,6 +371,14 @@ Enter numbers above!
 
 <h2>📝 Geometry Quiz</h2>
 
+<select id="difficulty">
+
+<option value="easy">Easy</option>
+<option value="medium">Medium</option>
+<option value="hard">Hard</option>
+
+</select>
+
 <p id="question"></p>
 
 <input type="number" id="answer" placeholder="Your Answer">
@@ -339,6 +391,106 @@ Enter numbers above!
 Answer the question!
 </div>
 
+<p>
+🏆 Score:
+<span id="savedScore">0</span>
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>🛒 XP Shop</h2>
+
+<div class="shop-item">
+
+<h3>🌈 Rainbow Theme</h3>
+
+<p>
+Cost: 100 XP
+</p>
+
+<button onclick="buyRainbow()">
+Buy Theme
+</button>
+
+</div>
+
+<div class="shop-item">
+
+<h3>🔥 Fire Badge</h3>
+
+<p>
+Cost: 50 XP
+</p>
+
+<button onclick="buyFireBadge()">
+Buy Badge
+</button>
+
+</div>
+
+</div>
+
+<div class="section pro">
+
+<h2>
+💎 Premium Membership
+</h2>
+
+<ul>
+<li>⭐ Pentagon formulas</li>
+<li>⭐ Hexagon formulas</li>
+<li>⭐ Octagon formulas</li>
+<li>⭐ Cube formulas</li>
+<li>⭐ Sphere formulas</li>
+<li>⭐ Cone formulas</li>
+<li>⭐ Bigger XP rewards</li>
+<li>⭐ More quizzes</li>
+</ul>
+
+<button onclick="unlockPremium()">
+💳 Unlock Premium
+</button>
+
+<div class="output" id="premiumMessage">
+Premium Locked 🔒
+</div>
+
+</div>
+
+<div id="premiumArea" class="section premium-area">
+
+<h2>💎 Premium Geometry Lab</h2>
+
+<p>⬟ Pentagon = side × 5</p>
+<p>⬢ Hexagon = side × 6</p>
+<p>🛑 Octagon = side × 8</p>
+<p>⚽ Sphere Volume = 4/3 × π × r³</p>
+<p>🍦 Cone Volume = (1/3)πr²h</p>
+<p>🧊 Cube Volume = side³</p>
+
+<hr>
+
+<h2>🎯 Premium Quiz</h2>
+
+<p id="premiumQuestion"></p>
+
+<input type="number" id="premiumAnswer" placeholder="Premium Answer">
+
+<button onclick="checkPremium()">
+💎 Submit Premium Answer
+</button>
+
+<div class="output" id="premiumOutput">
+Premium quiz waiting...
+</div>
+
+<p>
+💎 Premium Score:
+<span id="premiumScore">0</span>
+</p>
+
 </div>
 
 <div class="section">
@@ -349,13 +501,9 @@ Answer the question!
 If this website helped you, consider supporting it!
 </p>
 
-<a href="https://buymeacoffee.com/maria8" target="_blank">
-
-<button>
+<button onclick="window.open('https://buymeacoffee.com/maria8')">
 ☕ Buy Me a Coffee
 </button>
-
-</a>
 
 </div>
 
@@ -369,8 +517,6 @@ If this website helped you, consider supporting it!
 
 <audio id="correctSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=success-1-6297.mp3"></audio>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <script>
 
 function toggleDark(){
@@ -380,12 +526,17 @@ document.body.classList.toggle("dark");
 let xp=0;
 let level=1;
 let streak=0;
+let score=0;
+let daily=0;
+let premiumScore=0;
 
 function updateLevel(){
 
 document.getElementById("xp").innerText=xp;
 document.getElementById("level").innerText=level;
 document.getElementById("streak").innerText=streak;
+document.getElementById("savedScore").innerText=score;
+document.getElementById("dailyCount").innerText=daily;
 
 let percent=(xp/(level*100))*100;
 
@@ -405,11 +556,63 @@ xp+=amount;
 if(xp>=level*100){
 
 level++;
+
 alert("🎉 LEVEL UP!");
 
 }
 
 updateLevel();
+
+}
+
+function buyRainbow(){
+
+if(xp>=100){
+
+xp-=100;
+
+document.body.style.background=
+"linear-gradient(135deg,purple,cyan,pink)";
+
+alert("🌈 Theme Unlocked!");
+
+updateLevel();
+
+}else{
+
+alert("❌ Not enough XP!");
+
+}
+
+}
+
+function buyFireBadge(){
+
+if(xp>=50){
+
+xp-=50;
+
+document.getElementById("badges").innerHTML +=
+'<div class="badge">🔥 Fire Badge</div>';
+
+alert("🔥 Badge Unlocked!");
+
+updateLevel();
+
+}else{
+
+alert("❌ Not enough XP!");
+
+}
+
+}
+
+function unlockPremium(){
+
+document.getElementById("premiumArea").classList.add("unlocked");
+
+document.getElementById("premiumMessage").innerText=
+"💎 Premium Unlocked!";
 
 }
 
@@ -540,13 +743,36 @@ let current;
 
 function newQuestion(){
 
-let n1=Math.floor(Math.random()*10)+1;
-let n2=Math.floor(Math.random()*10)+1;
+let questions=[
 
-current={
-q:`Rectangle ${n1} × ${n2} = ?`,
-a:n1*n2
-};
+{
+q:"Triangle area with base 10 and height 5?",
+a:25
+},
+
+{
+q:"Circle area rounded with radius 3?",
+a:28
+},
+
+{
+q:"Rectangle area 8 × 4?",
+a:32
+},
+
+{
+q:"Trapezoid area with top 4 bottom 6 height 5?",
+a:25
+},
+
+{
+q:"Rectangle perimeter 5 and 5?",
+a:20
+}
+
+];
+
+current=questions[Math.floor(Math.random()*questions.length)];
 
 document.getElementById("question").innerText=current.q;
 
@@ -562,11 +788,11 @@ if(user===current.a){
 
 document.getElementById("correctSound").play();
 
+score++;
 streak++;
+daily++;
 
 addXP(10);
-
-confetti();
 
 document.getElementById("quizOutput").innerText=
 "🎉 Correct!";
@@ -585,6 +811,83 @@ updateLevel();
 document.getElementById("answer").value="";
 
 newQuestion();
+
+}
+
+let premiumQuestions=[
+
+{
+q:"Pentagon perimeter with side 5?",
+a:25
+},
+
+{
+q:"Hexagon perimeter with side 4?",
+a:24
+},
+
+{
+q:"Octagon perimeter with side 3?",
+a:24
+},
+
+{
+q:"Cube volume with side 3?",
+a:27
+},
+
+{
+q:"Sphere volume rounded with radius 2?",
+a:34
+},
+
+{
+q:"Cone volume rounded with radius 3 and height 3?",
+a:28
+}
+
+];
+
+let currentPremium;
+
+function newPremiumQuestion(){
+
+currentPremium=
+premiumQuestions[Math.floor(Math.random()*premiumQuestions.length)];
+
+document.getElementById("premiumQuestion").innerText=
+currentPremium.q;
+
+}
+
+newPremiumQuestion();
+
+function checkPremium(){
+
+let user=parseFloat(document.getElementById("premiumAnswer").value);
+
+if(user===currentPremium.a){
+
+premiumScore++;
+
+addXP(25);
+
+document.getElementById("premiumOutput").innerText=
+"🎉 Correct Premium Answer!";
+
+}else{
+
+document.getElementById("premiumOutput").innerText=
+"❌ Wrong!";
+
+}
+
+document.getElementById("premiumScore").innerText=
+premiumScore;
+
+document.getElementById("premiumAnswer").value="";
+
+newPremiumQuestion();
 
 }
 
