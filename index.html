@@ -1,3 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>📐 K-8 Geometry Tutor</title>
+
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/128/1048/1048953.png">
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+max-width:900px;
+margin:auto;
+padding:20px;
+background:#f4f4f4;
+color:#222;
+transition:.3s;
+}
+
+.dark{
+background:#121212;
+color:white;
+}
+
+.section{
+background:white;
+padding:20px;
+margin:20px 0;
+border-radius:12px;
+box-shadow:0 2px 6px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.dark .section{
+background:#1f1f1f;
+}
+
+.logo{
+font-size:65px;
+text-align:center;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
+}
+
+h1,h2{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+border:1px solid #ccc;
+box-sizing:border-box;
+}
+
+button{
+background:#007BFF;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+margin-top:10px;
+font-size:15px;
+transition:.2s;
+}
+
+button:hover{
+background:#0056b3;
+transform:scale(1.03);
+}
+
+.output{
+margin-top:12px;
+padding:12px;
+background:#eee;
+border-left:5px solid #007BFF;
+white-space:pre-wrap;
+border-radius:6px;
+}
+
+.dark .output{
+background:#333;
+}
+
+.pro{
+border:2px solid hotpink;
+}
+
+.badge{
+background:hotpink;
+color:white;
+padding:4px 8px;
+border-radius:20px;
+font-size:12px;
+}
+
+.footer{
+text-align:center;
+font-size:13px;
+margin-top:30px;
+}
+
+.score{
+font-weight:bold;
+font-size:18px;
+}
+
+.ad{
+background:#ddd;
+padding:15px;
+text-align:center;
+border-radius:8px;
+font-weight:bold;
+}
+
+.dark .ad{
+background:#2d2d2d;
+}
+
+a{
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="logo">📐</div>
+
+<h1>K-8 Geometry Tutor & Quizzer</h1>
+
+<p style="text-align:center;">
+👩‍💻 Coded and designed by a 12-year-old developer
+</p>
+
+<center>
+<button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
+</center>
+
+<h2 style="text-align:center;">
+Shapes Area and Perimeter
+</h2>
+
+<div class="section">
+
+<h2>🔺 Triangle Area & Perimeter</h2>
+
+<input type="number" id="triHeight" placeholder="Height">
+<input type="number" id="triBase" placeholder="Base">
+<input type="number" id="triSide1" placeholder="Side 1">
+<input type="number" id="triSide2" placeholder="Side 2">
+
+<button onclick="triangle()">🧮 Calculate</button>
+
+<div class="output" id="triOutput">
+Enter numbers above!
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>⚪ Circle Area & Circumference</h2>
+
+<input type="number" id="radius" placeholder="Radius">
+
+<button onclick="circle()">🧮 Calculate</button>
+
+<div class="output" id="circleOutput">
+Enter numbers above!
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🟦 Rectangle Area & Perimeter</h2>
+
+<input type="number" id="rectLength" placeholder="Length">
+<input type="number" id="rectWidth" placeholder="Width">
+
+<button onclick="rectangle()">🧮 Calculate</button>
+
+<div class="output" id="rectOutput">
+Enter numbers above!
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>📏 Trapezoid Area & Perimeter</h2>
+
+<input type="number" id="trapTop" placeholder="Top Base">
+<input type="number" id="trapBottom" placeholder="Bottom Base">
+<input type="number" id="trapHeight" placeholder="Height">
+<input type="number" id="trapLeft" placeholder="Left Side">
+<input type="number" id="trapRight" placeholder="Right Side">
+
+<button onclick="trapezoid()">🧮 Calculate</button>
+
+<div class="output" id="trapOutput">
+Enter numbers above!
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>📝 Random Geometry Quiz 🎯</h2>
+
+<p id="question"></p>
+
+<input type="number" id="answer" placeholder="Your Answer">
+
+<button onclick="checkAnswer()">✅ Submit Answer</button>
+
+<div class="output" id="quizOutput">
+Answer the question!
+</div>
+
+<p class="score">
+🏆 Saved Score:
+<span id="savedScore">0</span>
+</p>
+
+</div>
+
 <div class="section pro">
 
 <h2>
@@ -9,7 +251,7 @@
 🔒 Subscribe to unlock premium geometry features!
 </p>
 
-<ul id="premiumList">
+<ul>
 <li>⭐ Harder questions</li>
 <li>⭐ Random word problems</li>
 <li>⭐ More geometry shapes</li>
@@ -49,3 +291,247 @@
 </div>
 
 </div>
+
+<div class="section">
+
+<h2>☕ Support the Developer</h2>
+
+<p>
+If this website helped you, consider supporting it!
+</p>
+
+<a href="https://buymeacoffee.com/YOURNAME" target="_blank">
+
+<button>
+☕ Buy Me a Coffee
+</button>
+
+</a>
+
+</div>
+
+<div class="section ad">
+
+📢 Your ads can go here later using Google AdSense
+
+</div>
+
+<div class="footer">
+
+<a href="privacy.html">
+Privacy Policy
+</a>
+
+</div>
+
+<script>
+
+function toggleDark(){
+document.body.classList.toggle("dark");
+}
+
+function triangle(){
+
+let h=parseFloat(document.getElementById("triHeight").value);
+let b=parseFloat(document.getElementById("triBase").value);
+let s1=parseFloat(document.getElementById("triSide1").value);
+let s2=parseFloat(document.getElementById("triSide2").value);
+
+if(isNaN(h)||isNaN(b)||isNaN(s1)||isNaN(s2)){
+document.getElementById("triOutput").innerText="Please enter valid numbers!";
+return;
+}
+
+let area=(b*h)/2;
+let perimeter=b+s1+s2;
+
+document.getElementById("triOutput").innerText=
+`📚 STEP BY STEP
+
+Area Formula:
+(base × height) ÷ 2
+
+(${b} × ${h}) ÷ 2
+
+${b*h} ÷ 2 = ${area}
+
+--------------------
+
+Perimeter:
+${b} + ${s1} + ${s2}
+
+= ${perimeter}`;
+}
+
+function circle(){
+
+let r=parseFloat(document.getElementById("radius").value);
+
+if(isNaN(r)){
+document.getElementById("circleOutput").innerText="Please enter a valid number!";
+return;
+}
+
+let area=Math.PI*r*r;
+let c=2*Math.PI*r;
+
+document.getElementById("circleOutput").innerText=
+`📚 STEP BY STEP
+
+Area Formula:
+π × r²
+
+π × ${r} × ${r}
+
+= ${area.toFixed(2)}
+
+--------------------
+
+Circumference Formula:
+2 × π × r
+
+2 × π × ${r}
+
+= ${c.toFixed(2)}`;
+}
+
+function rectangle(){
+
+let l=parseFloat(document.getElementById("rectLength").value);
+let w=parseFloat(document.getElementById("rectWidth").value);
+
+if(isNaN(l)||isNaN(w)){
+document.getElementById("rectOutput").innerText="Please enter valid numbers!";
+return;
+}
+
+let area=l*w;
+let perimeter=2*(l+w);
+
+document.getElementById("rectOutput").innerText=
+`📚 STEP BY STEP
+
+Area:
+${l} × ${w}
+
+= ${area}
+
+--------------------
+
+Perimeter:
+2(${l}+${w})
+
+2(${l+w})
+
+= ${perimeter}`;
+}
+
+function trapezoid(){
+
+let t=parseFloat(document.getElementById("trapTop").value);
+let b=parseFloat(document.getElementById("trapBottom").value);
+let h=parseFloat(document.getElementById("trapHeight").value);
+let l=parseFloat(document.getElementById("trapLeft").value);
+let r=parseFloat(document.getElementById("trapRight").value);
+
+if(isNaN(t)||isNaN(b)||isNaN(h)||isNaN(l)||isNaN(r)){
+document.getElementById("trapOutput").innerText="Please enter valid numbers!";
+return;
+}
+
+let area=((t+b)*h)/2;
+let perimeter=t+b+l+r;
+
+document.getElementById("trapOutput").innerText=
+`📚 STEP BY STEP
+
+Area:
+((${t}+${b})×${h})÷2
+
+(${t+b}×${h})÷2
+
+${(t+b)*h}÷2
+
+= ${area}
+
+--------------------
+
+Perimeter:
+${t}+${b}+${l}+${r}
+
+= ${perimeter}`;
+}
+
+let score=localStorage.getItem("score") || 0;
+
+document.getElementById("savedScore").innerText=score;
+
+let questions=[
+{q:"Rectangle 5 × 4 = ?",a:20},
+{q:"Triangle area with base 6 and height 3?",a:9},
+{q:"3 + 4 + 5 = ?",a:12},
+{q:"Rectangle 9 × 2 = ?",a:18},
+{q:"Circle circumference with radius 2? (round)",a:13}
+];
+
+let current;
+
+function newQuestion(){
+
+current=questions[Math.floor(Math.random()*questions.length)];
+
+document.getElementById("question").innerText=current.q;
+}
+
+newQuestion();
+
+function checkAnswer(){
+
+let user=parseFloat(document.getElementById("answer").value);
+
+if(user===current.a){
+
+score++;
+
+localStorage.setItem("score",score);
+
+document.getElementById("quizOutput").innerText=
+"🎉 Correct!";
+
+}else{
+
+document.getElementById("quizOutput").innerText=
+"❌ Wrong! Correct answer: "+current.a;
+}
+
+document.getElementById("savedScore").innerText=score;
+
+document.getElementById("answer").value="";
+
+newQuestion();
+}
+
+function unlockPremium(){
+
+document.getElementById("premiumContent").style.display="block";
+
+document.getElementById("premiumText").innerText=
+"✅ Premium Unlocked!";
+
+localStorage.setItem("premium","yes");
+
+}
+
+if(localStorage.getItem("premium")==="yes"){
+
+document.getElementById("premiumContent").style.display="block";
+
+document.getElementById("premiumText").innerText=
+"✅ Premium Unlocked!";
+
+}
+
+</script>
+
+</body>
+</html>
