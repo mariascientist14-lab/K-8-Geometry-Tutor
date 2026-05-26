@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>📐 K-8 Geometry Tutor</title>
+
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2784/2784487.png">
 
 <style>
 
@@ -125,7 +129,12 @@ font-weight:bold;
 background:#2d2d2d;
 }
 
+a{
+text-decoration:none;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -142,7 +151,11 @@ background:#2d2d2d;
 <button onclick="toggleDark()">🌙 Toggle Dark Mode</button>
 </center>
 
-  <div class="section">
+<h2 style="text-align:center;">
+Shapes Area and Perimeter
+</h2>
+
+<div class="section">
 
 <h2>📚 Geometry Formulas</h2>
 
@@ -162,7 +175,7 @@ background:#2d2d2d;
 
 <div class="section">
 
-<h2>🔺 Triangle</h2>
+<h2>🔺 Triangle Area & Perimeter</h2>
 
 <input type="number" id="triHeight" placeholder="Height">
 <input type="number" id="triBase" placeholder="Base">
@@ -179,7 +192,7 @@ Enter numbers above!
 
 <div class="section">
 
-<h2>⚪ Circle</h2>
+<h2>⚪ Circle Area & Circumference</h2>
 
 <input type="number" id="radius" placeholder="Radius">
 
@@ -193,7 +206,7 @@ Enter numbers above!
 
 <div class="section">
 
-<h2>🟦 Rectangle</h2>
+<h2>🟦 Rectangle Area & Perimeter</h2>
 
 <input type="number" id="rectLength" placeholder="Length">
 <input type="number" id="rectWidth" placeholder="Width">
@@ -208,7 +221,7 @@ Enter numbers above!
 
 <div class="section">
 
-<h2>📏 Trapezoid</h2>
+<h2>📏 Trapezoid Area & Perimeter</h2>
 
 <input type="number" id="trapTop" placeholder="Top Base">
 <input type="number" id="trapBottom" placeholder="Bottom Base">
@@ -262,11 +275,14 @@ Answer the question!
 <li>⭐ More geometry shapes</li>
 <li>⭐ Bigger score system</li>
 <li>⭐ Future multiplayer mode</li>
+<li>⭐ Geometry formulas</li>
 </ul>
 
+<a href="#" target="_blank">
 <button>
 💳 Subscribe for $4.99/mo
 </button>
+</a>
 
 </div>
 
@@ -278,15 +294,19 @@ Answer the question!
 If this website helped you, consider supporting it!
 </p>
 
+<a href="https://buymeacoffee.com/YOURNAME" target="_blank">
+
 <button>
 ☕ Buy Me a Coffee
 </button>
+
+</a>
 
 </div>
 
 <div class="section ad">
 
-📢 Advertisement Space
+📢 Your ads can go here later using Google AdSense
 
 </div>
 
@@ -445,7 +465,7 @@ let questions=[
 {q:"Triangle area with base 6 and height 3?",a:9},
 {q:"3 + 4 + 5 = ?",a:12},
 {q:"Rectangle 9 × 2 = ?",a:18},
-{q:"Circle area radius 2? (round)",a:13}
+{q:"Circle circumference with radius 2? (round)",a:13}
 ];
 
 let current;
@@ -479,6 +499,8 @@ document.getElementById("quizOutput").innerText=
 }
 
 document.getElementById("savedScore").innerText=score;
+
+document.getElementById("answer").value="";
 
 newQuestion();
 }
